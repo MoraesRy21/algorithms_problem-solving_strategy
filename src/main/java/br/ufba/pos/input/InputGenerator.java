@@ -1,0 +1,124 @@
+package br.ufba.pos.input;
+
+import br.ufba.pos.input.structure.Point;
+import br.ufba.pos.input.structure.TwoLargeNumbers;
+import br.ufba.pos.utils.UtilsCreators;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * Input Generator class witch provide static method to generate types of Inputs.
+ */
+public class InputGenerator {
+
+	/**
+	 * Generate an Input of
+	 *
+	 * @param numbersExecution value that's point to numbers of execution given by the size of type of given input.
+	 * @param incrementRange value that's describe the range between inputs created by the create method by {@see UtilsCreators} class
+	 * @return an input of Point list as {@code List<Point>}
+	 */
+	public static Input<List<Point>> generateInputOfPointList(int numbersExecution, int incrementRange) {
+		checkNumbersExecution(numbersExecution);
+		checkIncrementRange(incrementRange);
+		List<List<Point>> list = new ArrayList();
+
+		int sizeListGenerator=incrementRange;
+		for(int i=0; i<numbersExecution; i++) {
+			List<Point> listRandomPoints = UtilsCreators.createListRandomPoints(sizeListGenerator);
+			sizeListGenerator = sizeListGenerator + incrementRange;
+			list.add(listRandomPoints);
+		}
+		return new Input<>(list);
+	}
+
+	/**
+	 * Generate an Input of
+	 *
+	 * @param numbersExecution value that's point to numbers of execution given by the size of type of given input.
+	 * @param incrementRange value that's describe the range between inputs created by the create method by {@see UtilsCreators} class
+	 * @return an input of interviewed list as {@code List<String>}
+	 */
+	public static Input<List<String>> generateInputOfInterviewList(int numbersExecution, int incrementRange) {
+		checkNumbersExecution(numbersExecution);
+		checkIncrementRange(incrementRange);
+		List<List<String>> list = new ArrayList();
+
+		int sizeListGenerator=incrementRange;
+		for(int i=0; i<numbersExecution; i++) {
+			List<String> interviewList = UtilsCreators.createListWithUniqueAnswer(sizeListGenerator);
+			sizeListGenerator = sizeListGenerator + incrementRange;
+			list.add(interviewList);
+		}
+		return new Input<>(list);
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public static Input<List<String>> generateInputOfInterviewListTest() {
+		List<List<String>> list = new ArrayList();
+
+		List<String> interviewList = Arrays.asList("Carro", "Sapato", "Roupa", "Sapato", "Roupa", "Roupa", "Carro", "Roupa");
+		list.add(interviewList);
+		return new Input<>(list);
+	}
+
+	/**
+	 * Generate an Input of
+	 *
+	 * @param numbersExecution value that's point to numbers of execution given by the size of type of given input.
+	 * @param incrementNumBits value that's describe the number of bits between inputs created by the create method by {@see UtilsCreators} class.
+	 * @return an input of two large numbers as {@code List<TwoLargeNumbers>}
+	 */
+	public static Input<TwoLargeNumbers> generateInputOfTwoLargeNumbers(int numbersExecution, int incrementNumBits) {
+		checkNumbersExecution(numbersExecution);
+		checkIncrementRange(incrementNumBits);
+		List<TwoLargeNumbers> list = new ArrayList();
+
+		int bits = 64;
+		for(int i=0; i<numbersExecution; i++) {
+			TwoLargeNumbers twoLargeNumbers = UtilsCreators.createTwoLargeNumbers(bits, true);
+			list.add(twoLargeNumbers);
+			bits = bits + incrementNumBits;
+		}
+		return new Input<>(list);
+	}
+
+	/**
+	 * Generate an Input of list of random positive numbers starting with a list of minimum of 10.
+	 *
+	 * @param numbersExecution value that's point to numbers of execution given by the size of type of given input.
+	 * @param incrementRange value that's describe the range between inputs created by the create method by {@see UtilsCreators} class
+	 * @return an input of random list of integer number as {@code List<Integer>}
+	 */
+	public static Input<List<Integer>> generateInputOfListOfIntegers(int numbersExecution, int incrementRange) {
+		checkNumbersExecution(numbersExecution);
+		checkIncrementRange(incrementRange);
+		List<List<Integer>> list = new ArrayList();
+
+		int increment = 10;
+		for(int i=0; i<numbersExecution; i++) {
+			List<Integer> numList = UtilsCreators.createIntegerListOfUniqueNumbers(increment);
+			list.add(numList);
+			increment = increment + incrementRange;
+		}
+		return new Input<>(list);
+	}
+
+	private static void checkNumbersExecution(int numbersExecution) {
+		if(numbersExecution <= 0) {
+			throw new IllegalArgumentException("The numbersExecution must be > 0");
+		}
+	}
+
+	private static void checkIncrementRange(int incrementRange) {
+		if(incrementRange < 0) {
+			throw new IllegalArgumentException("The input increment must be >= 0");
+		}
+	}
+
+}

@@ -1,12 +1,12 @@
 package br.ufba.pos.utils;
 
-import br.ufba.pos.utils.structure.Point;
-import br.ufba.pos.utils.structure.TwoLargeNumbers;
+import br.ufba.pos.input.structure.Point;
+import br.ufba.pos.input.structure.TwoLargeNumbers;
 
 import java.math.BigInteger;
 import java.util.*;
 
-public class Utils {
+public class UtilsCreators {
 
     static final List<String> products = Arrays.asList("Smartphones", "Notebooks", "Consoles", "Smartwatches", "Wireless Ears Buds",
             "Smart light", "Air Fryers", "Portable Vacuum Cleaner", "Office chair", "Yoga Mats", "Posture Corrector", "Water bottles",
@@ -14,7 +14,7 @@ public class Utils {
 
     private static Random random = new Random();
 
-    public static List<Point> creatListRandomPoints(int numPoints) {
+    public static List<Point> createListRandomPoints(int numPoints) {
         List<Point> pointList = new ArrayList<>();
 
         for(int i=0; i<numPoints; i++) {
@@ -45,11 +45,16 @@ public class Utils {
     /**
      * Create an object with to large numbers
      *
+     * @param numBits number of bits to generate a numbers.
+     * @param absolute true for positive numbers only or false to integer numbers.
      * @return TwoLargeNumbers object.
      */
-    public static TwoLargeNumbers createTwoLargeNumbers(int numBits) {
-        String value1 = new BigInteger(numBits, random).abs().toString();
-        String value2 = new BigInteger(numBits, random).abs().toString();
+    public static TwoLargeNumbers createTwoLargeNumbers(int numBits, boolean absolute) {
+        BigInteger value1 = new BigInteger(numBits, random);
+        BigInteger value2 = new BigInteger(numBits, random);
+        if(absolute) {
+            return new TwoLargeNumbers(value1.abs(), value2.abs());
+        }
         return new TwoLargeNumbers(value1, value2);
     }
 

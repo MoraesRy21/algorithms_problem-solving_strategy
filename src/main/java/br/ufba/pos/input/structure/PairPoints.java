@@ -1,5 +1,8 @@
-package br.ufba.pos.utils.structure;
+package br.ufba.pos.input.structure;
 
+/**
+ * Hold a pair of Point classes
+ */
 public class PairPoints {
 
     public Point p1, p2;

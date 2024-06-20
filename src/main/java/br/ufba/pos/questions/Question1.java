@@ -1,12 +1,12 @@
 package br.ufba.pos.questions;
 
-import br.ufba.pos.utils.structure.PairPoints;
-import br.ufba.pos.utils.structure.Point;
+import br.ufba.pos.counter.CounterHolder;
+import br.ufba.pos.solutions.DivideAndConquerAlgorithm;
+import br.ufba.pos.input.structure.PairPoints;
+import br.ufba.pos.input.structure.Point;
+import br.ufba.pos.utils.Algorithms;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * <h2>Par de Pontos Mais Próximos</h2>
@@ -15,18 +15,12 @@ import java.util.List;
  * encontrar o par de pontos mais próximos nesse conjunto. O tempo de execução deve
  * ser de 𝑂(𝑛 log(𝑛)) no pior caso.
  */
-public class Question1 extends Question<List<Point>> {
+public class Question1 extends Question<List<Point>> implements DivideAndConquerAlgorithm {
 
     private List<Point> pointList;
 
-    @Override
-    public List<Point> getInput() {
-        return this.pointList;
-    }
-
     public Question1() {
-        super.gCounterMapInstruction = new LinkedHashMap<Integer, Integer>();
-        super.dcCounterMapInstruction = new LinkedHashMap<Integer, Integer>();
+        fillMapCountersHolders();
     }
 
     @Override
@@ -40,74 +34,81 @@ public class Question1 extends Question<List<Point>> {
     }
 
     @Override
+    public void execute() {
+        super.execute();
+
+        System.out.println(">>>> DIVIDE AND CONQUER ALGORITHM");
+        divideAndConquerAlgorithm();
+    }
+
+    @Override
     protected void genericAlgorithm() {
+        CounterHolder counterHolder = mapCountersHolders.get(Algorithms.GENERIC_ALGORITHM.algorithmName);
+        counter = counterHolder.getInstructionCounter();
+
         PairPoints pairPoints = minimumDistancePoints(pointList);
         System.out.println("Minimum distance:       " + pairPoints.minimumDistance);
         System.out.println("Closet pair of points:  " + pairPoints.printPairPoints());
 
-        gCounterMapInstruction.put(pointList.size(), counter.getCounter());
-        counter.resetCounter();
+        counterHolder.putCounterMapInstructionAndResetCounter(pointList.size());
     }
 
     @Override
-    protected void divideAndConquerAlgorithm() {
+    public void divideAndConquerAlgorithm() {
+        CounterHolder counterHolder = mapCountersHolders.get(Algorithms.DIVIDE_AND_CONQUER_ALGORITHM.algorithmName);
+        counter = counterHolder.getInstructionCounter();
+
         PairPoints pairPoints = nearbyPointsRecursive(pointList);
         System.out.println("Minimum distance:       " + pairPoints.minimumDistance);
         System.out.println("Closet pair of points:  " + pairPoints.printPairPoints());
 
-        dcCounterMapInstruction.put(pointList.size(), counter.getCounter());
-        counter.resetCounter();
-    }
-
-    @Override
-    protected void dynamicProgramingAlgorithm() {
-
+        counterHolder.putCounterMapInstructionAndResetCounter(pointList.size());
     }
 
     private PairPoints nearbyPointsRecursive(List<Point> pointList) {
-        int n = pointList.size(); counter.countInstructions();
-        if (pointList.size() <= 3) { counter.countInstructions();
+        int n = pointList.size(); counter.increment();
+        if (pointList.size() <= 3) { counter.increment();
             return minimumDistancePoints(pointList);
         }
 
-        int mid = n / 2; counter.countInstructions();
+        int mid = n / 2; counter.increment();
 
-        List<Point> leftPoints = pointList.subList(0, mid); counter.countInstructions();
-        List<Point> rightPoints = pointList.subList(mid, pointList.size()); counter.countInstructions();
+        List<Point> leftPoints = pointList.subList(0, mid); counter.increment();
+        List<Point> rightPoints = pointList.subList(mid, pointList.size()); counter.increment();
 
-        PairPoints leftPairPoints = nearbyPointsRecursive(leftPoints); counter.countInstructions();
-        PairPoints rightPairPoints = nearbyPointsRecursive(rightPoints); counter.countInstructions();
+        PairPoints leftPairPoints = nearbyPointsRecursive(leftPoints); counter.increment();
+        PairPoints rightPairPoints = nearbyPointsRecursive(rightPoints); counter.increment();
 
-        double minorMinimumDistance = Double.min(leftPairPoints.minimumDistance, rightPairPoints.minimumDistance); counter.countInstructions();
+        double minorMinimumDistance = Double.min(leftPairPoints.minimumDistance, rightPairPoints.minimumDistance); counter.increment();
 
         /*
          * Find the pair of points with minor minimum distance.
          */
-        PairPoints minPair; counter.countInstructions();
-        if (minorMinimumDistance == leftPairPoints.minimumDistance) { counter.countInstructions();
-            minPair = leftPairPoints; counter.countInstructions();
+        PairPoints minPair; counter.increment();
+        if (minorMinimumDistance == leftPairPoints.minimumDistance) { counter.increment();
+            minPair = leftPairPoints; counter.increment();
         } else {
-            minPair = rightPairPoints; counter.countInstructions();
+            minPair = rightPairPoints; counter.increment();
         }
 
-        List<Point> strip = new ArrayList<>(); counter.countInstructions();
-        double midX = pointList.get(mid).x(); counter.countInstructions();
-        for (Point point : pointList) { counter.countInstructions();
-            if (Math.abs(point.x() - midX) < minorMinimumDistance) { counter.countInstructions();
-                strip.add(point); counter.countInstructions();
+        List<Point> strip = new ArrayList<>(); counter.increment();
+        double midX = pointList.get(mid).x(); counter.increment();
+        for (Point point : pointList) { counter.increment();
+            if (Math.abs(point.x() - midX) < minorMinimumDistance) { counter.increment();
+                strip.add(point); counter.increment();
             }
         }
-        strip.sort(Comparator.comparingDouble(Point::y)); counter.countInstructions();
+        strip.sort(Comparator.comparingDouble(Point::y)); counter.increment();
 
-        for(int i=0; i<strip.size(); i++) { counter.countInstructions();
-            int j = i+1; counter.countInstructions();
-            while (j < strip.size() && (strip.get(j).y() - strip.get(i).y()) < minorMinimumDistance) { counter.countInstructions();
-                double distance = distance(strip.get(i), strip.get(j)); counter.countInstructions();
-                if (distance < minorMinimumDistance) { counter.countInstructions();
-                    minorMinimumDistance = distance; counter.countInstructions();
-                    minPair = new PairPoints(strip.get(i), strip.get(j), minorMinimumDistance); counter.countInstructions();
+        for(int i=0; i<strip.size(); i++) { counter.increment();
+            int j = i+1; counter.increment();
+            while (j < strip.size() && (strip.get(j).y() - strip.get(i).y()) < minorMinimumDistance) { counter.increment();
+                double distance = distance(strip.get(i), strip.get(j)); counter.increment();
+                if (distance < minorMinimumDistance) { counter.increment();
+                    minorMinimumDistance = distance; counter.increment();
+                    minPair = new PairPoints(strip.get(i), strip.get(j), minorMinimumDistance); counter.increment();
                 }
-                j += 1; counter.countInstructions();
+                j += 1; counter.increment();
             }
         }
 
@@ -121,14 +122,14 @@ public class Question1 extends Question<List<Point>> {
      * @return a struct of two pair of point with the distance between then
      */
     private PairPoints minimumDistancePoints(List<Point> pointList) {
-        double minimumDistance = Double.MAX_VALUE; counter.countInstructions();
-        PairPoints pairPoints = null; counter.countInstructions();
-        for (int i = 0; i < pointList.size(); i++) { counter.countInstructions();
-            for (int j = i + 1; j < pointList.size(); j++) { counter.countInstructions();
-                double distance = distance(pointList.get(i), pointList.get(j)); counter.countInstructions(5);
-                if (distance < minimumDistance) { counter.countInstructions();
-                    minimumDistance = distance; counter.countInstructions();
-                    pairPoints = new PairPoints(pointList.get(i), pointList.get(j), minimumDistance); counter.countInstructions(6);
+        double minimumDistance = Double.MAX_VALUE; counter.increment();
+        PairPoints pairPoints = null; counter.increment();
+        for (int i = 0; i < pointList.size(); i++) { counter.increment();
+            for (int j = i + 1; j < pointList.size(); j++) { counter.increment();
+                double distance = distance(pointList.get(i), pointList.get(j)); counter.increment(5);
+                if (distance < minimumDistance) { counter.increment();
+                    minimumDistance = distance; counter.increment();
+                    pairPoints = new PairPoints(pointList.get(i), pointList.get(j), minimumDistance); counter.increment(6);
                 }
             }
         }

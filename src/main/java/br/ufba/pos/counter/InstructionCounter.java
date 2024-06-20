@@ -1,4 +1,4 @@
-package br.ufba.pos.utils;
+package br.ufba.pos.counter;
 
 public class InstructionCounter {
 
@@ -7,12 +7,12 @@ public class InstructionCounter {
     public InstructionCounter() {
     }
 
-    public boolean countInstructions() {
+    public boolean increment() {
         counter++;
         return true;
     }
 
-    public boolean countInstructions(int numberInstructions) {
+    public boolean increment(int numberInstructions) {
         counter = counter + numberInstructions;
         return true;
     }

@@ -1,15 +1,14 @@
 package br.ufba.pos;
 
+import br.ufba.pos.input.Input;
+import br.ufba.pos.input.InputGenerator;
+import br.ufba.pos.input.structure.Point;
+import br.ufba.pos.input.structure.TwoLargeNumbers;
 import br.ufba.pos.perform.TestPerformance;
 import br.ufba.pos.questions.Question1;
 import br.ufba.pos.questions.Question2;
 import br.ufba.pos.questions.Question3;
 import br.ufba.pos.questions.Question5;
-import br.ufba.pos.utils.Algorithm;
-import br.ufba.pos.utils.structure.Point;
-import br.ufba.pos.utils.structure.TwoLargeNumbers;
-import br.ufba.pos.utils.Input;
-import br.ufba.pos.utils.Input.Generator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,26 +40,25 @@ public class Main {
         List<String> listArgs = Arrays.asList(args);
 
         if(listArgs.contains("q1")) {
-            Input<List<Point>> input1 = Generator.generateInputOfPointList(50, 2);
+            Input<List<Point>> input1 = InputGenerator.generateInputOfPointList(50, 2);
             TestPerformance.executeTestSolutionQuestion(new Question1(), input1);
             questionCalled = true;
         }
 
         if (listArgs.contains("q2")) {
-            Input<TwoLargeNumbers> input2 = Generator.generateInputOfTwoLargeNumbers(10, 4);
+            Input<TwoLargeNumbers> input2 = InputGenerator.generateInputOfTwoLargeNumbers(10, 4);
             TestPerformance.executeTestSolutionQuestion(new Question2(), input2);
             questionCalled = true;
         }
 
         if (listArgs.contains("q3")) {
-            Input<List<Integer>> input3 = Generator.generateInputOfListOfIntegers(100, 5);
+            Input<List<Integer>> input3 = InputGenerator.generateInputOfListOfIntegers(100, 5);
             TestPerformance.executeTestSolutionQuestion(new Question3(), input3);
             questionCalled = true;
         }
 
         if (listArgs.contains("q5")) {
-            Input<List<String>> input5 = Generator.generateInputOfInterviewList(50, 10);
-//        Input<List<String>> input5 = Generator.generateInputOfInterviewListTest();
+            Input<List<String>> input5 = InputGenerator.generateInputOfInterviewList(50, 10);
             TestPerformance.executeTestSolutionQuestion(new Question5(), input5);
             questionCalled = true;
         }

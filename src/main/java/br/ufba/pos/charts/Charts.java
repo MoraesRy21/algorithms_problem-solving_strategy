@@ -1,5 +1,6 @@
-package br.ufba.pos.utils;
+package br.ufba.pos.charts;
 
+import br.ufba.pos.counter.CounterHolder;
 import tech.tablesaw.api.IntColumn;
 import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.api.Table;
@@ -10,6 +11,8 @@ import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.traces.ScatterTrace;
 import tech.tablesaw.plotly.traces.Trace;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Charts {
@@ -34,6 +37,22 @@ public class Charts {
         Layout layout = createLayout();
 
         Plot.show(new Figure(layout, genericTrace, divideConquerTrace));
+    }
+
+    public static void plotChart(Map<String, CounterHolder> map) {
+        int i = 0;
+        Trace[] traces = new Trace[map.size()];
+        for(Map.Entry<String, CounterHolder> entry : map.entrySet()) {
+            String algorithmLabel = entry.getKey();
+            Table table = createTable(entry.getValue().getCounterMapInstruction(), algorithmLabel, LABEL_INPUT_SIZE, LABEL_NUMBER_INSTRUCTION);
+            Trace trace = createScatterTrace(table, algorithmLabel);
+            traces[i] = trace;
+            i++;
+        }
+
+        Layout layout = createLayout();
+
+        Plot.show(new Figure(layout, traces));
     }
 
     public static void plotChartStringInteger(Map<String, Integer> gMap, Map<String, Integer> dcMap) {
