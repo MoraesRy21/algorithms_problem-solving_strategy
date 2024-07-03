@@ -1,10 +1,10 @@
-package br.ufba.pos.questions;
+package br.ufba.pos.solutions;
 
 import br.ufba.pos.counter.CounterHolder;
-import br.ufba.pos.solutions.DivideAndConquerAlgorithm;
+import br.ufba.pos.solutions.strategies.DivideAndConquerAlgorithm;
+import br.ufba.pos.solutions.strategies.GenericAlgorithm;
 import br.ufba.pos.utils.Algorithms;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -19,17 +19,12 @@ import java.util.List;
  * uma marca citada por mais da metade dos entrevistados.
  * O algoritmo não deve alocar memória extra além da necessária para armazenar |𝑉|
  */
-public class Question5 extends Question<List<String>> implements DivideAndConquerAlgorithm {
+public class Solution5 extends Solution<List<String>> implements GenericAlgorithm, DivideAndConquerAlgorithm {
 
     private List<String> interviewList;
 
-    public Question5() {
+    public Solution5() {
         fillMapCountersHolders();
-    }
-
-    @Override
-    public String getQuestionTitle() {
-        return "Majoritária em Pesquisa de Opinião";
     }
 
     @Override
@@ -38,19 +33,20 @@ public class Question5 extends Question<List<String>> implements DivideAndConque
     }
 
     @Override
-    public void result() {
-        super.result();
+    public void executeSolutions() {
+        System.out.println(">>>> GENERIC ALGORITHM");
+        genericAlgorithm();
 
         System.out.println(">>>> DIVIDE AND CONQUER ALGORITHM");
         divideAndConquerAlgorithm();
     }
 
     @Override
-    protected void genericAlgorithm() {
+    public void genericAlgorithm() {
         CounterHolder counterHolder = mapCountersHolders.get(Algorithms.GENERIC_ALGORITHM.algorithmName);
         counter = counterHolder.getInstructionCounter();
-
-        Object[] majorProduct = searchForMajor(interviewList);
+        String[] interviews = interviewList.toArray(new String[interviewList.size()]);
+        Object[] majorProduct = searchForMajor(interviews);
         printAlgorithmResult((Boolean) majorProduct[0], (String) majorProduct[1]);
 
         counterHolder.putCounterMapInstructionAndResetCounter(interviewList.size());
@@ -60,8 +56,8 @@ public class Question5 extends Question<List<String>> implements DivideAndConque
     public void divideAndConquerAlgorithm() {
         CounterHolder counterHolder = mapCountersHolders.get(Algorithms.DIVIDE_AND_CONQUER_ALGORITHM.algorithmName);
         counter = counterHolder.getInstructionCounter();
-
-        Object[] majorProduct = searchForMajorRecursive(interviewList);
+        String[] interviews = interviewList.toArray(new String[interviewList.size()]);
+        Object[] majorProduct = searchForMajorRecursive(interviews);
 
         printAlgorithmResult((Boolean) majorProduct[0], (String) majorProduct[1]);
 
@@ -76,86 +72,83 @@ public class Question5 extends Question<List<String>> implements DivideAndConque
         }
     }
 
-    private Object[] searchForMajor(List<String> interviewList) {
-        int interviewListHalfSize = interviewList.size() / 2; counter.increment();
+    private Object[] searchForMajor(String[] interviewList) {
+        int interviewListHalfSize = interviewList.length / 2; counter.increment();
 
-        String majorProduct = interviewList.get(0); counter.increment();
+        String majorProduct = interviewList[0]; counter.increment();
         int count = 1; counter.increment();
-        for(int i=1; i < interviewList.size(); i++) { counter.increment();
-            if(count == 0) { counter.increment();
-                majorProduct = interviewList.get(i); counter.increment();
+        counter.increment();
+        for(int i=1; i < interviewList.length; i++) {
+            counter.increment();
+            if(count == 0 && counter.increment()) {
+                majorProduct = interviewList[i]; counter.increment();
                 count = 1; counter.increment();
-            } else if(majorProduct.equals(interviewList.get(i))) { counter.increment();
+            } else if(majorProduct.equals(interviewList[i]) && counter.increment()) {
                 count++; counter.increment();
-            } else { counter.increment();
+            } else {
                 count--; counter.increment();
             }
         }
 
         count = 0; counter.increment();
         for(String product : interviewList) { counter.increment();
-            if(product.equals(majorProduct)) { counter.increment();
+            if(product.equals(majorProduct) && counter.increment()) {
                 count++; counter.increment();
             }
         }
 
-        if(count > interviewListHalfSize) { counter.increment();
+        if(count > interviewListHalfSize && counter.increment()) {
+            counter.increment();
             return new Object[]{Boolean.TRUE, majorProduct};
-        } else { counter.increment();
+        } else {
+            counter.increment();
             return new Object[]{Boolean.TRUE, majorProduct};
         }
     }
 
-    private Object[] searchForMajorRecursive(List<String> interviewList) {
-        int interviewListHalfSize = interviewList.size() / 2; counter.increment();
+    private Object[] searchForMajorRecursive(String[] interviewList) {
 
-        Object[] major = findMajor(interviewList);
+        Object[] major = findMajorRecursive(interviewList, 0, interviewList.length - 1);
 
         String majorProduct = (String) major[0]; counter.increment();
         int count = (Integer) major[1]; counter.increment();
 
-        if(count >= interviewListHalfSize) { counter.increment();
+        if(count > interviewList.length / 2 && counter.increment()) {
+            counter.increment();
             return new Object[]{Boolean.TRUE, majorProduct};
-        } else { counter.increment();
+        } else {
+            counter.increment();
             return new Object[]{Boolean.TRUE, majorProduct};
         }
     }
 
-    /**
-     *
-     *
-     * @param interviewList
-     * @return array of two elements. The fist is the major product as String
-     * and the second a counter as int.
-     */
-    private Object[] findMajor(List<String> interviewList) {
-        int listSize = interviewList.size(); counter.increment();
-        if(listSize == 1) { counter.increment();
-            String product = interviewList.get(0); counter.increment();
+    private Object[] findMajorRecursive(String[] interviewList, int start, int end) {
+        if(start == end && counter.increment()) {
+            String product = interviewList[start]; counter.increment();
             return new Object[]{product, 1};
         }
 
-        int middle = listSize / 2; counter.increment();
-        Object[] left = findMajor(interviewList.subList(0, middle)); counter.increment();
-        Object[] right = findMajor(interviewList.subList(middle, listSize)); counter.increment();
+        int middle = (start + end) / 2; counter.increment();
+        Object[] left = findMajorRecursive(interviewList, start, middle); counter.increment();
+        Object[] right = findMajorRecursive(interviewList, middle, end); counter.increment();
 
-        int countLeft = counter(interviewList, (String) left[0]); counter.increment();
-        int countRight = counter(interviewList, (String) right[0]); counter.increment();
+        int countLeft = counter(interviewList, start, end, (String) left[0]); counter.increment();
+        int countRight = counter(interviewList, start, end, (String) right[0]); counter.increment();
 
-        if(listSize > 2) {
-
-        }
-        if(countLeft > countRight) { counter.increment();
+        if(countLeft > (end - start + 1) / 2 && counter.increment()) {
             return new Object[]{left[0], countLeft};
-        } else { counter.increment();
+        } else if(countRight > (end - start + 1) / 2 && counter.increment()) {
             return new Object[]{right[0], countLeft};
+        } else {
+            return new Object[]{null, 0};
         }
     }
 
-    private int counter(List<String> interviewList, String product) {
+    private int counter(String[] interviewList, int start, int end, String product) {
         int count = 0; counter.increment();
-        for (int i=0; i < interviewList.size(); i++) { counter.increment();
-            if (interviewList.get(i) == product) { counter.increment();
+        for (int i = start; i <= end + 1; i++) {
+            counter.increment();
+            if (interviewList[i] == product && counter.increment()) {
                 count++; counter.increment();
             }
         }

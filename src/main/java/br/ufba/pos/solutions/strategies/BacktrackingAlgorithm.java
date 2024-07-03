@@ -1,4 +1,4 @@
-package br.ufba.pos.solutions;
+package br.ufba.pos.solutions.strategies;
 
 public interface BacktrackingAlgorithm {
 

@@ -2,6 +2,7 @@ package br.ufba.pos.utils;
 
 import br.ufba.pos.input.structure.Point;
 import br.ufba.pos.input.structure.TwoLargeNumbers;
+import br.ufba.pos.input.structure.TwoListNumber;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -23,7 +24,6 @@ public class UtilsCreators {
             pointList.add(new Point(x, y));
         }
 
-        System.out.println(pointList);
         return pointList;
     }
 
@@ -84,7 +84,42 @@ public class UtilsCreators {
         return set.stream().toList();
     }
 
+    /**
+     * Create a list of integer of different sizes adding elements in a range of 1 to 10 incrementing in 2 both sides of range.
+     *
+     * @return List<Integer> object.
+     */
+    public static TwoListNumber createTwoSortedListNumberOfSameSize(int quantityNum) {
+        List<Integer> numbersSorted1 = new ArrayList<>(quantityNum);
+        List<Integer> numbersSorted2 = new ArrayList<>(quantityNum);
+
+        addValuesInList(numbersSorted1, quantityNum);
+        addValuesInList(numbersSorted2, quantityNum);
+
+        return new TwoListNumber(numbersSorted1, numbersSorted2);
+    }
+
+    private static void addValuesInList(List<Integer> list, int quantityNum) {
+        int startRange = 1, endRange = 10;
+        list.add(random.nextInt(startRange, endRange));
+        for(int i=0; i<quantityNum; i++) {
+            insertInListSortedRandomNumber(list, i, startRange, endRange);
+            startRange += 2;
+            endRange += 2;
+        }
+    }
+
+    private static void insertInListSortedRandomNumber(List<Integer> list, int iteration, int startRange, int endRange) {
+        int nextInt = random.nextInt(startRange, endRange);
+        int element = list.get(iteration);
+        while (nextInt < element) {
+            nextInt = random.nextInt(startRange, endRange);
+        }
+        list.add(nextInt);
+    }
+
     public static int getRandomInt() {
         return random.nextInt(1, 100_000);
     }
+
 }

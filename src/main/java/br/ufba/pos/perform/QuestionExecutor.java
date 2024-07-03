@@ -1,22 +1,23 @@
 package br.ufba.pos.perform;
 
-import br.ufba.pos.questions.Question;
 import br.ufba.pos.input.Input;
+import br.ufba.pos.questions.Question;
 
 import java.util.Iterator;
 
 
-public class TestPerformance {
+public class QuestionExecutor {
 
     public static <T> void executeTestSolutionQuestion(Question<T> question, Input<T> input) {
         System.out.println("============================= " + question.getQuestionTitle() + " =============================");
+        System.out.println(question.getQuestionDescription());
 
         int i = 1;
         Iterator<T> it = input.iterator();
         while(it.hasNext()) {
             T element = it.next();
             printIteration(i, element);
-            question.setInput(element);
+            question.getSolution().setInput(element);
             question.execute();
             i++;
         }
@@ -31,7 +32,7 @@ public class TestPerformance {
      * @param element input element.
      */
     private static void printIteration(int iterationNumber, Object element) {
-        System.out.println("———————————————————————————————————————— Iteration N "+iterationNumber);
+        System.out.println("\n———————————————————————————————————————— Iteration N "+iterationNumber);
         System.out.println("Input: " + element.toString());
     }
 }

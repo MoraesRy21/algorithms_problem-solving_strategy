@@ -11,8 +11,6 @@ import tech.tablesaw.plotly.components.Layout;
 import tech.tablesaw.plotly.traces.ScatterTrace;
 import tech.tablesaw.plotly.traces.Trace;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class Charts {
@@ -22,29 +20,13 @@ public class Charts {
     public static final String LABEL_NUMBER_INSTRUCTION = "Number of Instruction";
     public static final String LABEL_DIVIDE_AND_CONQUER_ALGORITHM = "Divide and Conquer Algorithm";
 
-
-
-    public static void plotChart(Map<Integer, Integer> gMap, Map<Integer, Integer> dcMap) {
-
-        Table genericTable = createTable(gMap, LABEL_GENERIC_ALGORITHM, LABEL_INPUT_SIZE, LABEL_NUMBER_INSTRUCTION);
-
-        Trace genericTrace = createScatterTrace(genericTable, LABEL_GENERIC_ALGORITHM);
-
-        Table divideConquerTable = createTable(dcMap, LABEL_DIVIDE_AND_CONQUER_ALGORITHM, LABEL_INPUT_SIZE, LABEL_NUMBER_INSTRUCTION);
-
-        Trace divideConquerTrace = createScatterTrace(divideConquerTable, LABEL_DIVIDE_AND_CONQUER_ALGORITHM);
-
-        Layout layout = createLayout();
-
-        Plot.show(new Figure(layout, genericTrace, divideConquerTrace));
-    }
-
     public static void plotChart(Map<String, CounterHolder> map) {
         int i = 0;
         Trace[] traces = new Trace[map.size()];
         for(Map.Entry<String, CounterHolder> entry : map.entrySet()) {
             String algorithmLabel = entry.getKey();
             Table table = createTable(entry.getValue().getCounterMapInstruction(), algorithmLabel, LABEL_INPUT_SIZE, LABEL_NUMBER_INSTRUCTION);
+            System.out.println("\n"+table.printAll());
             Trace trace = createScatterTrace(table, algorithmLabel);
             traces[i] = trace;
             i++;
@@ -55,30 +37,9 @@ public class Charts {
         Plot.show(new Figure(layout, traces));
     }
 
-    public static void plotChartStringInteger(Map<String, Integer> gMap, Map<String, Integer> dcMap) {
-
-        Table genericTable = createTableStringInteger(gMap, LABEL_GENERIC_ALGORITHM, LABEL_INPUT_SIZE, LABEL_NUMBER_INSTRUCTION);
-
-        Trace genericTrace = createScatterTrace(genericTable, LABEL_GENERIC_ALGORITHM);
-
-        Table divideConquerTable = createTableStringInteger(dcMap, LABEL_DIVIDE_AND_CONQUER_ALGORITHM, LABEL_INPUT_SIZE, LABEL_NUMBER_INSTRUCTION);
-
-        Trace divideConquerTrace = createScatterTrace(divideConquerTable, LABEL_DIVIDE_AND_CONQUER_ALGORITHM);
-
-        Layout layout = createLayout();
-
-        Plot.show(new Figure(layout, genericTrace, divideConquerTrace));
-    }
-
     private static Table createTable(Map<Integer, Integer> map, String tableName, String columnKeyName, String columnValueName) {
         return Table.create(tableName,
                 IntColumn.create(columnKeyName, map.keySet().toArray(new Integer[map.size()])),
-                IntColumn.create(columnValueName, map.values().toArray(new Integer[map.size()])));
-    }
-
-    private static Table createTableStringInteger(Map<String, Integer> map, String tableName, String columnKeyName, String columnValueName) {
-        return Table.create(tableName,
-                StringColumn.create(columnKeyName, map.keySet().toArray(new String[map.size()])),
                 IntColumn.create(columnValueName, map.values().toArray(new Integer[map.size()])));
     }
 

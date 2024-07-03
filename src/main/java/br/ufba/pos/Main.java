@@ -4,14 +4,15 @@ import br.ufba.pos.input.Input;
 import br.ufba.pos.input.InputGenerator;
 import br.ufba.pos.input.structure.Point;
 import br.ufba.pos.input.structure.TwoLargeNumbers;
-import br.ufba.pos.perform.TestPerformance;
-import br.ufba.pos.questions.Question1;
-import br.ufba.pos.questions.Question2;
-import br.ufba.pos.questions.Question3;
-import br.ufba.pos.questions.Question5;
+import br.ufba.pos.input.structure.TwoListNumber;
+import br.ufba.pos.perform.QuestionExecutor;
+import br.ufba.pos.questions.*;
+import br.ufba.pos.solutions.*;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Proponha duas soluções, uma usando divisão e conquista enquanto a outra não faz
@@ -40,26 +41,37 @@ public class Main {
         List<String> listArgs = Arrays.asList(args);
 
         if(listArgs.contains("q1")) {
-            Input<List<Point>> input1 = InputGenerator.generateInputOfPointList(50, 2);
-            TestPerformance.executeTestSolutionQuestion(new Question1(), input1);
+            Input<List<Point>> input = InputGenerator.generateInputOfPointList(50, 4);
+            Question<List<Point>> question = QuestionFactory.question1();
+            QuestionExecutor.executeTestSolutionQuestion(question, input);
             questionCalled = true;
         }
 
         if (listArgs.contains("q2")) {
-            Input<TwoLargeNumbers> input2 = InputGenerator.generateInputOfTwoLargeNumbers(10, 4);
-            TestPerformance.executeTestSolutionQuestion(new Question2(), input2);
+            Input<TwoLargeNumbers> input = InputGenerator.generateInputOfTwoLargeNumbers(10, 4);
+            Question<TwoLargeNumbers> question = QuestionFactory.question2();
+            QuestionExecutor.executeTestSolutionQuestion(question, input);
             questionCalled = true;
         }
 
         if (listArgs.contains("q3")) {
-            Input<List<Integer>> input3 = InputGenerator.generateInputOfListOfIntegers(100, 5);
-            TestPerformance.executeTestSolutionQuestion(new Question3(), input3);
+            Input<List<Integer>> input = InputGenerator.generateInputOfListOfIntegers(100, 5);
+            Question<List<Integer>> question = QuestionFactory.question3();
+            QuestionExecutor.executeTestSolutionQuestion(question, input);
+            questionCalled = true;
+        }
+
+        if (listArgs.contains("q4")) {
+            Input<TwoListNumber> input = InputGenerator.generateInputOfTwoListNumber(50, 5);
+            Question<TwoListNumber> question = QuestionFactory.question4();
+            QuestionExecutor.executeTestSolutionQuestion(question, input);
             questionCalled = true;
         }
 
         if (listArgs.contains("q5")) {
-            Input<List<String>> input5 = InputGenerator.generateInputOfInterviewList(50, 10);
-            TestPerformance.executeTestSolutionQuestion(new Question5(), input5);
+            Input<List<String>> input = InputGenerator.generateInputOfInterviewList(50, 10);
+            Question<List<String>> question = QuestionFactory.question5();
+            QuestionExecutor.executeTestSolutionQuestion(question, input);
             questionCalled = true;
         }
 

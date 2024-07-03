@@ -1,11 +1,11 @@
-package br.ufba.pos.questions;
+package br.ufba.pos.solutions;
 
 import br.ufba.pos.counter.CounterHolder;
-import br.ufba.pos.solutions.DivideAndConquerAlgorithm;
+import br.ufba.pos.solutions.strategies.DivideAndConquerAlgorithm;
+import br.ufba.pos.solutions.strategies.GenericAlgorithm;
 import br.ufba.pos.utils.Algorithms;
 import br.ufba.pos.utils.UtilsCreators;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -15,17 +15,12 @@ import java.util.List;
  * Desenvolva um algoritmo para encontrar algum índice 𝑖 tal que 𝑋𝑖 = 𝑖.
  * O tempo de execução do algoritmo deve ser de 𝑂(log 𝑛).
  */
-public class Question3 extends Question<List<Integer>> implements DivideAndConquerAlgorithm {
+public class Solution3 extends Solution<List<Integer>> implements GenericAlgorithm, DivideAndConquerAlgorithm {
 
     private int[] numList;
 
-    public Question3() {
+    public Solution3() {
         fillMapCountersHolders();
-    }
-
-    @Override
-    public String getQuestionTitle() {
-        return "Busca Binária em Vetor Ordenado";
     }
 
     @Override
@@ -34,15 +29,16 @@ public class Question3 extends Question<List<Integer>> implements DivideAndConqu
     }
 
     @Override
-    public void result() {
-        super.result();
+    public void executeSolutions() {
+        System.out.println(">>>> GENERIC ALGORITHM");
+        genericAlgorithm();
 
         System.out.println(">>>> DIVIDE AND CONQUER ALGORITHM");
         divideAndConquerAlgorithm();
     }
 
     @Override
-    protected void genericAlgorithm() {
+    public void genericAlgorithm() {
         CounterHolder counterHolder = mapCountersHolders.get(Algorithms.GENERIC_ALGORITHM.algorithmName);
         counter = counterHolder.getInstructionCounter();
 

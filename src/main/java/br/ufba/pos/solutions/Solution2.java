@@ -1,11 +1,8 @@
-package br.ufba.pos.questions;
+package br.ufba.pos.solutions;
 
 import br.ufba.pos.counter.CounterHolder;
-import br.ufba.pos.solutions.BacktrackingAlgorithm;
-import br.ufba.pos.solutions.DivideAndConquerAlgorithm;
 import br.ufba.pos.input.structure.TwoLargeNumbers;
-import br.ufba.pos.solutions.DynamicProgramingAlgorithm;
-import br.ufba.pos.solutions.GreedyAlgorithm;
+import br.ufba.pos.solutions.strategies.*;
 import br.ufba.pos.utils.Algorithms;
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,7 +10,6 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.TreeMap;
 
 /**
  * Q02: Multiplicação de Números Inteiros Grandes
@@ -21,11 +17,11 @@ import java.util.TreeMap;
  * Desenvolva um algoritmo que encontre a multiplicação de X e Y em menos de O(n²) passos.
  * Encontre a complexidade do algoritmo desenvolvido.
  */
-public class Question2 extends Question<TwoLargeNumbers> implements DivideAndConquerAlgorithm {
+public class Solution2 extends Solution<TwoLargeNumbers> implements GenericAlgorithm, DivideAndConquerAlgorithm {
 
     private TwoLargeNumbers twoLargeNumbers;
 
-    public Question2() {
+    public Solution2() {
         fillMapCountersHolders();
     }
 
@@ -34,10 +30,11 @@ public class Question2 extends Question<TwoLargeNumbers> implements DivideAndCon
      */
     @Override
     protected void fillMapCountersHolders() {
-        String gcName = Algorithms.GENERIC_ALGORITHM.algorithmName;
-        mapCountersHolders.put(gcName, new CounterHolder<String>(gcName, new LinkedHashMap<String, Integer>()));
-
         List<Class<?>> interfaces = Arrays.asList(this.getClass().getInterfaces());
+        if(interfaces.contains(GenericAlgorithm.class)) {
+            String gcName = Algorithms.GENERIC_ALGORITHM.algorithmName;
+            mapCountersHolders.put(gcName, new CounterHolder<String>(gcName, new LinkedHashMap<String, Integer>()));
+        }
         if(interfaces.contains(DivideAndConquerAlgorithm.class)) {
             String dcName = Algorithms.DIVIDE_AND_CONQUER_ALGORITHM.algorithmName;
             mapCountersHolders.put(dcName, new CounterHolder<String>(dcName, new LinkedHashMap<String, Integer>()));
@@ -57,18 +54,14 @@ public class Question2 extends Question<TwoLargeNumbers> implements DivideAndCon
     }
 
     @Override
-    public String getQuestionTitle() {
-        return "Multiplicação de Números Inteiros Grandes";
-    }
-
-    @Override
     public void setInput(TwoLargeNumbers input) {
         this.twoLargeNumbers = input;
     }
 
     @Override
-    public void result() {
-        super.result();
+    public void executeSolutions() {
+        System.out.println(">>>> GENERIC ALGORITHM");
+        genericAlgorithm();
 
         System.out.println(">>>> DIVIDE AND CONQUER ALGORITHM");
         divideAndConquerAlgorithm();
@@ -77,8 +70,10 @@ public class Question2 extends Question<TwoLargeNumbers> implements DivideAndCon
         System.out.println("Expected multiplication: " + twoLargeNumbers.multiplication().toString()+"\n");
     }
 
+
+
     @Override
-    protected void genericAlgorithm() {
+    public void genericAlgorithm() {
         CounterHolder counterHolder = mapCountersHolders.get(Algorithms.GENERIC_ALGORITHM.algorithmName);
         counter = counterHolder.getInstructionCounter();
 
@@ -131,7 +126,7 @@ public class Question2 extends Question<TwoLargeNumbers> implements DivideAndCon
 
         String num1 = twoLargeNumbers.getNum1();
         String num2 = twoLargeNumbers.getNum2();
-        String result = mult(num1, num2);
+        String result = mult(num1.toCharArray(), num2.toCharArray());
         System.out.println("Multiplication result of " + num1 + " x " + num2 + " = " + result);
 
         counterHolder.putCounterMapInstructionAndResetCounter(StringUtils.leftPad(result, 42, "0"));
@@ -175,10 +170,7 @@ public class Question2 extends Question<TwoLargeNumbers> implements DivideAndCon
     }
 
     // Main driver method
-    private String mult(String value1, String value2) {
-        char[] x = value1.toCharArray();
-        char[] y = value2.toCharArray();
-
+    private String mult(char[] x, char[] y) {
         // Checking only if input is within range
         counter.increment(3);
         if (x.length < 2 && y.length < 2) {
@@ -213,9 +205,9 @@ public class Question2 extends Question<TwoLargeNumbers> implements DivideAndCon
 
         // Compute all mutilpying variables
         // needed to get the multiplication
-        long z0 = Long.parseLong(mult(Long.toString(a), Long.toString(c))); counter.increment();
-        long z1 = Long.parseLong(mult(Long.toString(a + b), Long.toString(c + d))); counter.increment(3);
-        long z2 = Long.parseLong(mult(Long.toString(b), Long.toString(d))); counter.increment();
+        long z0 = Long.parseLong(mult(Long.toString(a).toCharArray(), Long.toString(c).toCharArray())); counter.increment();
+        long z1 = Long.parseLong(mult(Long.toString(a + b).toCharArray(), Long.toString(c + d).toCharArray())); counter.increment(3);
+        long z2 = Long.parseLong(mult(Long.toString(b).toCharArray(), Long.toString(d).toCharArray())); counter.increment();
 
         long ans = (z0 * (long)Math.pow(10, halfMaxNumLength * 2) + ((z1 - z0 - z2) * (long)Math.pow(10, halfMaxNumLength) + z2));
         counter.increment(8);

@@ -1,6 +1,4 @@
-package br.ufba.pos.solutions;
-
-import br.ufba.pos.questions.Question;
+package br.ufba.pos.solutions.strategies;
 
 public interface DivideAndConquerAlgorithm {
 

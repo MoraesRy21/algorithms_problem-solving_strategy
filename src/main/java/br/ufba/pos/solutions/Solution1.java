@@ -1,9 +1,10 @@
-package br.ufba.pos.questions;
+package br.ufba.pos.solutions;
 
 import br.ufba.pos.counter.CounterHolder;
-import br.ufba.pos.solutions.DivideAndConquerAlgorithm;
 import br.ufba.pos.input.structure.PairPoints;
 import br.ufba.pos.input.structure.Point;
+import br.ufba.pos.solutions.strategies.DivideAndConquerAlgorithm;
+import br.ufba.pos.solutions.strategies.GenericAlgorithm;
 import br.ufba.pos.utils.Algorithms;
 
 import java.util.*;
@@ -15,11 +16,11 @@ import java.util.*;
  * encontrar o par de pontos mais próximos nesse conjunto. O tempo de execução deve
  * ser de 𝑂(𝑛 log(𝑛)) no pior caso.
  */
-public class Question1 extends Question<List<Point>> implements DivideAndConquerAlgorithm {
+public class Solution1 extends Solution<List<Point>> implements GenericAlgorithm, DivideAndConquerAlgorithm {
 
     private List<Point> pointList;
 
-    public Question1() {
+    public Solution1() {
         fillMapCountersHolders();
     }
 
@@ -29,20 +30,16 @@ public class Question1 extends Question<List<Point>> implements DivideAndConquer
     }
 
     @Override
-    public String getQuestionTitle() {
-        return "Par de Pontos Mais Próximos";
-    }
-
-    @Override
-    public void execute() {
-        super.execute();
+    public void executeSolutions() {
+        System.out.println(">>>> GENERIC ALGORITHM");
+        genericAlgorithm();
 
         System.out.println(">>>> DIVIDE AND CONQUER ALGORITHM");
         divideAndConquerAlgorithm();
     }
 
     @Override
-    protected void genericAlgorithm() {
+    public void genericAlgorithm() {
         CounterHolder counterHolder = mapCountersHolders.get(Algorithms.GENERIC_ALGORITHM.algorithmName);
         counter = counterHolder.getInstructionCounter();
 
@@ -65,6 +62,12 @@ public class Question1 extends Question<List<Point>> implements DivideAndConquer
         counterHolder.putCounterMapInstructionAndResetCounter(pointList.size());
     }
 
+    /**
+     * Find the closest pair of point
+     *
+     * @param pointList list of points
+     * @return
+     */
     private PairPoints nearbyPointsRecursive(List<Point> pointList) {
         int n = pointList.size(); counter.increment();
         if (pointList.size() <= 3) { counter.increment();
