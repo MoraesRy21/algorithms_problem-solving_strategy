@@ -1,8 +1,7 @@
 package br.ufba.pos.charts;
 
-import br.ufba.pos.counter.CounterHolder;
+import br.ufba.pos.solutions.counter.CounterHolder;
 import tech.tablesaw.api.IntColumn;
-import tech.tablesaw.api.StringColumn;
 import tech.tablesaw.api.Table;
 import tech.tablesaw.plotly.Plot;
 import tech.tablesaw.plotly.components.Figure;

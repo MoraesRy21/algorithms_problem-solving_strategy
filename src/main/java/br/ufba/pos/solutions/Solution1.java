@@ -1,11 +1,11 @@
 package br.ufba.pos.solutions;
 
-import br.ufba.pos.counter.CounterHolder;
-import br.ufba.pos.input.structure.PairPoints;
-import br.ufba.pos.input.structure.Point;
+import br.ufba.pos.solutions.counter.CounterHolder;
+import br.ufba.pos.problems.p1.PairPoints;
+import br.ufba.pos.problems.p1.Point;
 import br.ufba.pos.solutions.strategies.DivideAndConquerAlgorithm;
 import br.ufba.pos.solutions.strategies.GenericAlgorithm;
-import br.ufba.pos.utils.Algorithms;
+import br.ufba.pos.solutions.strategies.Algorithms;
 
 import java.util.*;
 

@@ -1,85 +1,77 @@
 package br.ufba.pos;
 
-import br.ufba.pos.input.Input;
-import br.ufba.pos.input.InputGenerator;
-import br.ufba.pos.input.structure.Point;
-import br.ufba.pos.input.structure.TwoLargeNumbers;
-import br.ufba.pos.input.structure.TwoListNumber;
-import br.ufba.pos.perform.QuestionExecutor;
-import br.ufba.pos.questions.*;
-import br.ufba.pos.solutions.*;
+import br.ufba.pos.executors.ObjectExecutor;
+import br.ufba.pos.readers.ArgumentReader;
+import br.ufba.pos.readers.PackageScanner;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Proponha duas soluções, uma usando divisão e conquista enquanto a outra não faz
- * uso desta técnica. Você deve comparar ambas as soluções experimentalmente, para cada um dos problemas.
- * Para tanto, várias instâncias devem ser geradas, com crescentes tamanhos de entrada.
- * O esforço computacional medido para encontrar as soluções deve então ser comparado com as
- * respectivas complexidades computacionais dadas pelas expressões assintóticas associadas.
- * <p>
- * Por exemplo, suponha que um problema P a ser resolvido tem instâncias de tamanho n, com n representando
- * o número de elementos contidos numa sequência de entrada. </br>
- * <p>
- * Para a avaliação experimental, diversas sequências de
- * entrada devem ser geradas para cada valor de n considerado. Se A e B são dois algoritmos que
- * resolvem P, o segundo baseado em divisão e conquista, com complexidades O(n²) e O(n·log(n)), respectivamente,
- * eles seriam avaliados experimentalmente contabilizando o esforço médio que fazem para resolver P para as diversas
- * instâncias de tamanho n a fim de:
- * <ul>
- *     <li>A) Saber se o esforço médio está próximo das respectivas complexidades (no pior caso)</li>
- *     <li>B) mensurar o ganho obtido com a versão baseada em divisão e conquista.</li>
- * </ul>
- */
 public class Main {
+
     public static void main(String[] args) {
-
-        boolean questionCalled = false;
-        List<String> listArgs = Arrays.asList(args);
-
-        if(listArgs.contains("q1")) {
-            Input<List<Point>> input = InputGenerator.generateInputOfPointList(50, 4);
-            Question<List<Point>> question = QuestionFactory.question1();
-            QuestionExecutor.executeTestSolutionQuestion(question, input);
-            questionCalled = true;
-        }
-
-        if (listArgs.contains("q2")) {
-            Input<TwoLargeNumbers> input = InputGenerator.generateInputOfTwoLargeNumbers(10, 4);
-            Question<TwoLargeNumbers> question = QuestionFactory.question2();
-            QuestionExecutor.executeTestSolutionQuestion(question, input);
-            questionCalled = true;
-        }
-
-        if (listArgs.contains("q3")) {
-            Input<List<Integer>> input = InputGenerator.generateInputOfListOfIntegers(100, 5);
-            Question<List<Integer>> question = QuestionFactory.question3();
-            QuestionExecutor.executeTestSolutionQuestion(question, input);
-            questionCalled = true;
-        }
-
-        if (listArgs.contains("q4")) {
-            Input<TwoListNumber> input = InputGenerator.generateInputOfTwoListNumber(50, 5);
-            Question<TwoListNumber> question = QuestionFactory.question4();
-            QuestionExecutor.executeTestSolutionQuestion(question, input);
-            questionCalled = true;
-        }
-
-        if (listArgs.contains("q5")) {
-            Input<List<String>> input = InputGenerator.generateInputOfInterviewList(50, 10);
-            Question<List<String>> question = QuestionFactory.question5();
-            QuestionExecutor.executeTestSolutionQuestion(question, input);
-            questionCalled = true;
-        }
-
-        if(!questionCalled) {
-            String message = "Invalid args. Args were not set.\n" +
-                    "Valid Args: 'q1', 'q2', 'q3', 'q4', 'q5'.\n\n" +
-                    "Non execution was performed! Set the write args!";
-            System.err.println(message);
+        if(args.length == 0 || (args.length == 1 && (args[0].equals("--help") || !args[0].equals("--all")))) {
+            Helper.help();
+            System.exit(0);
+        } else if(args.length == 1 && args[0].equals("--all")) {
+            executeAllSolutions();
+		} else if(args.length > 1 && args[0].equals("--problems")) {
+            if(args.length == 2 && args[1].equals("--help") || args[1].equals("-h")) {
+                //TODO Create a help that´s calls all helps of each question
+            }
+            executeSpecificSolutions(args);
+        } else {
+            Helper.help();
         }
     }
+
+    /**
+     * Executes all solutions defined in the classes located within the package "br.ufba.pos.problems".
+     * Each class in the package is expected to be a subclass of {@code ProblemCase} and should provide a
+     * no-argument constructor. The method dynamically discovers all eligible classes, instantiates them,
+     * and invokes their {@code executeTestSolutionQuestion} method.
+     *
+     * Upon encountering an exception during this process (e.g., missing required constructors,
+     * invocation errors, or access issues), the method wraps the exception in a {@code RuntimeException}
+     * and rethrows it.
+     *
+     * @throws RuntimeException if any error occurs during class discovery, instantiation, or method invocation
+     */
+    public static void executeAllSolutions() {
+        List<Class<?>> allClassesUsingClassLoader = PackageScanner.findClassesInPNumberedSubpackages("br.ufba.pos.problems");
+        for(Class<?> clazz : allClassesUsingClassLoader) {
+            ObjectExecutor.invokeDefaultSolution(clazz);
+        }
+    }
+
+    /**
+     * Executes specific solutions defined in the classes located within the package "br.ufba.pos.problems".
+     * The solutions to execute are determined by the program arguments provided.
+     *
+     * Each solution is expected to be represented by a class that is a subclass of {@code ProblemCase}
+     * and should provide a no-argument constructor. The method dynamically discovers all eligible classes,
+     * instantiates them, and invokes their {@code executeTestSolutionQuestion} method for the specified solutions.
+     *
+     * Upon encountering an exception during this process (e.g., missing required constructors,
+     * invocation errors, or access issues), the method wraps the exception in a {@code RuntimeException} and rethrows it.
+     *
+     * @param args the program arguments specifying which solutions to execute. Each argument represents
+     *             the identifier of a specific problem, such as "q1", "q2".
+     * @throws RuntimeException if any error occurs during class discovery, instantiation, or method invocation
+     */
+    public static void executeSpecificSolutions(String[] args) {
+        String[] pFlags = ArgumentReader.getPFlags(args, true);
+        List<Class<?>> allClassesUsingClassLoader = PackageScanner.findClassesInPNumberedSubpackages("br.ufba.pos.problems", pFlags);
+
+        Helper.checkHelpPFlags(args, allClassesUsingClassLoader);
+
+        Map<String, Object[]> mapParams = ArgumentReader.getMapParametersFlag(args);
+
+        for(Class<?> clazz : allClassesUsingClassLoader) {
+            Object[] params = mapParams.get(clazz.getSimpleName());
+            ObjectExecutor.invokeSolution(clazz, params);
+        }
+    }
+
 }

@@ -4,38 +4,135 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9eee9a07-fe52-4347-8e94-93e381186b0e" name="Changes" comment="" />
+    <list default="true" id="9eee9a07-fe52-4347-8e94-93e381186b0e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/problems/ProblemCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/charts/Charts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/charts/Charts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/counter/CounterHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/solutions/counter/CounterHolder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/counter/InstructionCounter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/solutions/counter/InstructionCounter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/input/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/problems/input/Input.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/input/InputGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/problems/input/InputGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/input/structure/PairPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/problems/p1/PairPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/input/structure/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/problems/p1/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/input/structure/TwoLargeNumbers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/problems/p2/TwoLargeNumbers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/input/structure/TwoListNumber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/problems/p4/TwoListNumber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/perform/QuestionExecutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/questions/Question.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/questions/QuestionFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/solutions/Solution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/solutions/Solution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/solutions/Solution1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/solutions/Solution1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/solutions/Solution2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/solutions/Solution2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/solutions/Solution3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/solutions/Solution3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/solutions/Solution4.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/solutions/Solution4.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/solutions/Solution5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/solutions/Solution5.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/utils/Algorithms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/solutions/strategies/Algorithms.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/ufba/pos/utils/UtilsCreators.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/ufba/pos/problems/input/UtilsCreators.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2gFWFhNJALmcJrT7kZ8DRTkU6f1" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Custom Question.executor": "Run",
+    "Application.Main Helper.executor": "Run",
+    "Application.Main Problems Help.executor": "Run",
+    "Application.Main Problems.executor": "Run",
+    "Application.Main.executor": "Debug",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.Algorithms_Divide_and_Conquer [deploy].executor": "Run",
+    "Maven.Algorithms_Divide_and_Conquer [install].executor": "Run",
+    "Maven.algorithms_pss [clean].executor": "Run",
+    "Maven.algorithms_pss [install].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "extract.method.default.visibility": "private",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/iarle/Documents/Development/MasterDegree/algorithms_problem-solving_strategy/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.41149426",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\iarle\Documents\Development\MasterDegree\algorithms_problem-solving_strategy\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main Helper">
+    <configuration name="Main Helper" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="br.ufba.pos.Main" />
+      <module name="algorithms_ps-s" />
+      <option name="PROGRAM_PARAMETERS" value="--help" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main Problems Help" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="br.ufba.pos.Main" />
+      <module name="algorithms_ps-s" />
+      <option name="PROGRAM_PARAMETERS" value="--problems -p1 -h -p2 -h" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main Problems" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="br.ufba.pos.Main" />
+      <module name="algorithms_ps-s" />
+      <option name="PROGRAM_PARAMETERS" value="--problems -p1 50 4 -p3 100 5" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="br.ufba.pos.Main" />
+      <module name="algorithms_ps-s" />
+      <option name="PROGRAM_PARAMETERS" value="--help" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Main Helper" />
+      <item itemvalue="Application.Main Problems" />
+      <item itemvalue="Application.Main Problems Help" />
+    </list>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.27812.49" />
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.27812.49" />
       </set>
     </attachedChunks>
   </component>
@@ -48,10 +145,28 @@
       <option name="presentableId" value="Default" />
       <updated>1715293704852</updated>
       <workItem from="1715293705933" duration="1000" />
+      <workItem from="1753841205038" duration="1837000" />
+      <workItem from="1753845535050" duration="44566000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/br/ufba/pos/Main.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/br/ufba/pos/executors/ObjectExecutor.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

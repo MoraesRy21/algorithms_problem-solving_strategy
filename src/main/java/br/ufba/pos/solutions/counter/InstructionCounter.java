@@ -1,4 +1,4 @@
-package br.ufba.pos.counter;
+package br.ufba.pos.solutions.counter;
 
 public class InstructionCounter {
 

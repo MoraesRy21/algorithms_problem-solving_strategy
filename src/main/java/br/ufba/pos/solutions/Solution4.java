@@ -1,6 +1,6 @@
 package br.ufba.pos.solutions;
 
-import br.ufba.pos.input.structure.TwoListNumber;
+import br.ufba.pos.problems.p4.TwoListNumber;
 import br.ufba.pos.solutions.strategies.DivideAndConquerAlgorithm;
 import br.ufba.pos.solutions.strategies.GenericAlgorithm;
 

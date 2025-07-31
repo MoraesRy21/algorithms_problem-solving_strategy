@@ -1,4 +1,4 @@
-package br.ufba.pos.input;
+package br.ufba.pos.problems.input;
 
 import java.util.Iterator;
 import java.util.List;

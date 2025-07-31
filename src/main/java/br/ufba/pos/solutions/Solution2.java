@@ -1,9 +1,9 @@
 package br.ufba.pos.solutions;
 
-import br.ufba.pos.counter.CounterHolder;
-import br.ufba.pos.input.structure.TwoLargeNumbers;
+import br.ufba.pos.solutions.counter.CounterHolder;
+import br.ufba.pos.problems.p2.TwoLargeNumbers;
 import br.ufba.pos.solutions.strategies.*;
-import br.ufba.pos.utils.Algorithms;
+import br.ufba.pos.solutions.strategies.Algorithms;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigInteger;

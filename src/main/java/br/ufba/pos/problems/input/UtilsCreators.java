@@ -1,8 +1,8 @@
-package br.ufba.pos.utils;
+package br.ufba.pos.problems.input;
 
-import br.ufba.pos.input.structure.Point;
-import br.ufba.pos.input.structure.TwoLargeNumbers;
-import br.ufba.pos.input.structure.TwoListNumber;
+import br.ufba.pos.problems.p1.Point;
+import br.ufba.pos.problems.p2.TwoLargeNumbers;
+import br.ufba.pos.problems.p4.TwoListNumber;
 
 import java.math.BigInteger;
 import java.util.*;

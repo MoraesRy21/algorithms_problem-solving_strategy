@@ -1,4 +1,4 @@
-package br.ufba.pos.utils;
+package br.ufba.pos.solutions.strategies;
 
 public enum Algorithms {
 

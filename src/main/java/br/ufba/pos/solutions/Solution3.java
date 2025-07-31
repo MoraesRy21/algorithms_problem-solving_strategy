@@ -1,10 +1,10 @@
 package br.ufba.pos.solutions;
 
-import br.ufba.pos.counter.CounterHolder;
+import br.ufba.pos.solutions.counter.CounterHolder;
 import br.ufba.pos.solutions.strategies.DivideAndConquerAlgorithm;
 import br.ufba.pos.solutions.strategies.GenericAlgorithm;
-import br.ufba.pos.utils.Algorithms;
-import br.ufba.pos.utils.UtilsCreators;
+import br.ufba.pos.solutions.strategies.Algorithms;
+import br.ufba.pos.problems.input.UtilsCreators;
 
 import java.util.List;
 

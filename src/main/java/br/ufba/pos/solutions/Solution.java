@@ -1,9 +1,9 @@
 package br.ufba.pos.solutions;
 
-import br.ufba.pos.counter.CounterHolder;
-import br.ufba.pos.counter.InstructionCounter;
+import br.ufba.pos.solutions.counter.CounterHolder;
+import br.ufba.pos.solutions.counter.InstructionCounter;
 import br.ufba.pos.solutions.strategies.*;
-import br.ufba.pos.utils.Algorithms;
+import br.ufba.pos.solutions.strategies.Algorithms;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;

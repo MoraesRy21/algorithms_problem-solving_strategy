@@ -1,4 +1,4 @@
-package br.ufba.pos.input.structure;
+package br.ufba.pos.problems.p2;
 
 import java.math.BigInteger;
 
