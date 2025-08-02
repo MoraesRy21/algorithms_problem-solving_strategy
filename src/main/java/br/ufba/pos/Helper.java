@@ -21,11 +21,12 @@ public class Helper {
 		System.out.println("Usage: java -jar algorithms_pss.jar [args]");
 		String validArgs = """
         Valid Args:
-            --help | -h		Displays this help message.
-            --all      		Executes all solutions within the package "br.ufba.pos.problems".
-            --problems 		Executes specific solutions within the package "br.ufba.pos.problems".
-            				passing flags like "-p1", "-p2", etc. to specify which solutions to execute.
-            				You can pass multiple flags to execute multiple solutions.
+            --help | -h			Displays this help message.
+            --all      			Executes all solutions within the package "br.ufba.pos.problems".
+            --problems -p<num> [--help | -h] | <[param1] [param2] ...> 
+            					Executes specific solutions within the package "br.ufba.pos.problems".
+            					passing flags like "-p1", "-p2", etc. to specify which solutions to execute.
+            					You can pass multiple flags to execute multiple solutions.
             				
         """;
 		System.out.println(validArgs);

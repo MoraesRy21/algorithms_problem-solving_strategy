@@ -4,7 +4,6 @@ import br.ufba.pos.executors.ObjectExecutor;
 import br.ufba.pos.readers.ArgumentReader;
 import br.ufba.pos.readers.PackageScanner;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -17,9 +16,6 @@ public class Main {
         } else if(args.length == 1 && args[0].equals("--all")) {
             executeAllSolutions();
 		} else if(args.length > 1 && args[0].equals("--problems")) {
-            if(args.length == 2 && args[1].equals("--help") || args[1].equals("-h")) {
-                //TODO Create a help that´s calls all helps of each question
-            }
             executeSpecificSolutions(args);
         } else {
             Helper.help();
@@ -63,7 +59,6 @@ public class Main {
     public static void executeSpecificSolutions(String[] args) {
         String[] pFlags = ArgumentReader.getPFlags(args, true);
         List<Class<?>> allClassesUsingClassLoader = PackageScanner.findClassesInPNumberedSubpackages("br.ufba.pos.problems", pFlags);
-
         Helper.checkHelpPFlags(args, allClassesUsingClassLoader);
 
         Map<String, Object[]> mapParams = ArgumentReader.getMapParametersFlag(args);
