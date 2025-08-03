@@ -1,107 +1,148 @@
-# Algorithms_Divide_and_Conquer
+# Algorithms Problem-Solving Strategy
 
-## Overview
+[![Build](https://img.shields.io/badge/Java-17-blue.svg)](https://www.oracle.com/java/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-This project, **Algorithms_Divide_and_Conquer**, implements algorithms based on the *Divide and Conquer* strategy to solve computational problems efficiently. One focus of the project is solving the "Closest Pair of Points" problem, which calculates the smallest distance between two points in a Cartesian plane. Various approaches, including a pure Divide and Conquer method and a generic algorithm, are applied and compared.
+This project was developed as part of the coursework for the subject  
+**IC0004 - Algorithms and Graphs** at the **Federal University of Bahia (UFBA)**.  
+It presents solutions to five classic Computer Science problems, each implemented with two distinct approaches:  
+one based on the **divide and conquer** technique and another alternative for experimental comparison.
 
-This project uses **Java 17**, and integrates several libraries like **Tablesaw** for data analysis and visualization, and **Apache Commons Lang** for utility functions.
+## ✍️ Author
+
+- Iarley Moraes
+
+## 🎯 Purpose
+
+Compare algorithmic problem solutions using different strategies, measuring computational performance and  
+analyzing their worst-case complexity.
+
+The central idea is to contrast generic algorithm implementations with algorithm design techniques, evaluating  
+the practical gains provided by various strategies such as  
+**Divide and Conquer**, **Backtracking**, **Dynamic Programming**, and **Greedy Algorithms**.
+
+## 📘 Problems Addressed So Far:
+
+Each problem is located in a specific package and is implemented with at least two different strategies:
+
+| Code (package) | Problem                                  | Techniques Used                                |
+|----------------|-------------------------------------------|------------------------------------------------|
+| p01            | Closest pair of points                    | Divide and Conquer vs. Brute Force             |
+| p02            | Large integer multiplication              | Karatsuba vs. Traditional multiplication       |
+| p03            | Binary search where index equals value    | Binary search vs. Linear search                |
+| p04            | Ordered union of vectors                  | Logarithmic search vs. Merge + Sort            |
+| p05            | Majority element detection                | Boyer-Moore vs. Divide and Conquer             |
 
 ---
 
-## Features
+## 📦 Project Structure
 
-- Implementation of Divide and Conquer algorithms to solve complex problems.
-- Analysis and comparison of algorithmic approaches.
-- Built-in utilities for measuring performance.
-- Visualization capabilities with **Tablesaw**.
-- Fully unit-tested for functionality and correctness.
+The project is a **Java with Maven** application that can be packaged and executed as a `.jar` file.
 
----
+- All problem cases are numbered from 1 to N and placed in packages from `p1` to `pN` with their respective <IPS> (Input Processed by the Solution).
+- For each problem case, there is a `Solution1.java` to `SolutionN.java` class that executes all algorithm strategies implemented for that problem.
+- **IMPORTANT ─ The package structure of problem cases must not be changed to avoid breaking the package scanning system.**
 
-## Project Structure
-
-The project is organized as follows:
 ```aiignore
-Algorithms_Divide_and_Conquer
-├── .idea # IntelliJ IDEA configuration files 
-├── src # Source code directory │ 
-                                ├── main # Application source code │ 
-                                                                   └── test # Unit test cases 
-                                ├── target # Compiled build output (generated automatically) 
-                                ├── pom.xml # Maven configuration file 
-                                └── .gitignore # Git ignore configuration
-``` 
+src/
+└── main
+│ ├── java
+│ │ └── br.ufba.pos
+│ │ │ ├── charts
+│ │ │ ├── executors
+│ │ │ ├── problems
+│ │ │ │ └── p1/ a p5/ ...
+│ │ │ ├── readers
+│ │ │ ├── solution
+│ │ │ │ └── Solution1.java to Solution5.java ...
+│ │ │ ├── Main.java
+│ │ │ ├── Helper.java
+```
 
 ---
 
-## Requirements
+## 🚀 Executando o Projeto
 
-Before setting up the project, ensure you have the following installed on your system:
+The project can be run in two ways:
+1. Through your preferred IDE by executing a Launcher with the necessary arguments
+2. By building the project and executing the generated JAR file
 
-1. **Java Development Kit (JDK 17)**: This version is required to build and run the application.
-2. **Maven**: Used to manage dependencies and build the project.
-3. **IntelliJ IDEA** (optional): Recommended for development with convenient tools to simplify configuration and debugging.
+### 📌 Requirements
+- Java 17
+- Maven 3.8+
+
+#### Dependencies used
+
+- tablesaw
+- commons-lang3
+
+### 🔧 Building the JAR
+
+Open your preferred terminal and run the commands:
+
+1. `mvn clean package install` – The JAR file will be generated in `target/algorithms_pss.jar`
+2. `java -jar target/algorithms_pss.jar --help`  to learn how to execute.
+
+## Running
+When executing the project, some information is printed to the terminal, including the data being processed by
+each of the implemented strategies for the given solution.
+
+At the end of the problem execution, your default web browser will open one tab per solution with a plot
+showing the asymptotic analysis of each implemented strategy.
+
+<img src="docs/newplot.png" width="50%" alt="Asymptotic Analysis of P1">
+
+### Comandos
+- To execute a specific problem case, run a command like:
+
+`java -jar target/algorithms_pss.jar --problems -p1 50 4`
+
+- To view help for the parameters of a specific Case Problem:
+
+`java -jar target/algorithms_pss.jar --problems -p1 -h`
+
+- To run a Case Problem using default parameters:
+
+`java -jar target/algorithms_pss.jar --problems -p1`
+
+- You can run multiple Case Problems simultaneously:
+
+`java -jar target/algorithms_pss.jar --problems -p1 50 4 -p2 40 5`
+
+## 📈  Experimental Comparisons
+The results of the empirical comparisons between strategies for each problem are detailed in the report IC0004_Trabalho_01.pdf. Some relevant notes:
+
+- Divide and Conquer algorithms showed significant performance gains in problems like Q01 (closest pair) and Q02 (Karatsuba).
+
+- For small inputs, simpler techniques may be competitive or even faster.
+
+## 🧠 Key Concepts
+Divide and Conquer
+
+Asymptotic complexity analysis
+
+Brute-force strategies
+
+Experimental performance analysis
+
+Processing large inputs with empirical measurements
+
+## 🤝 Contributions Welcome
+
+Feel free to contribute with new problem cases and algorithm strategies, respecting the current package structure.
 
 ---
 
-## Getting Started
-
-### Step 1: Clone the Repository
-Clone this repository to your local system using Git:
-
-bash git clone <repository-url> cd Algorithms_Divide_and_Conquer
- 
+## 📄 License
+This project is licensed under the MIT License.
 
 ---
 
-### Step 2: Import Project into IntelliJ IDEA
-1. Open IntelliJ IDEA.
-2. Select **Open or Import** and navigate to the directory where the repository is cloned.
-3. Select the **pom.xml** file and import as a Maven project.
-4. IntelliJ will automatically download dependencies and set up the project.
+## 📚 References
+Kleinberg & Tardos, Algorithm Design
+
+Cormen et al., Introduction to Algorithms
+
+IC0004 course notes and material
 
 ---
-
-### Step 3: Run Build and Tests
-To build the project and execute all unit tests, run the following Maven command:
-
-bash mvn clean install
- 
-This command performs the following tasks:
-- Cleans the previous build artifacts.
-- Compiles the source code.
-- Resolves all dependencies as defined in `pom.xml`.
-- Runs all unit tests.
-
----
-
-### Step 4: Run the Application
-The main application can be run from IntelliJ IDEA by locating the respective `main` class or adding a Run Configuration. Alternatively, use this Maven command:
-
-bash mvn exec:java
- 
----
-
-## Key Libraries Used
-
-The project makes use of the following dependencies:
-- **JUnit (3.8.1)**: Testing framework for creating and running unit tests.
-- **Tablesaw (0.42.0)**: Library for data analysis and charting, used for visual representation of results.
-    - `tablesaw-core`: Core features for managing and manipulating data.
-    - `tablesaw-jsplot`: Tools for graphical visualization.
-- **Apache Commons Lang (3.14.0)**: Useful utility methods for Java.
-
-All dependencies are defined in the `pom.xml` file and managed via Maven. The Maven build system automatically resolves and downloads them.
-
----
-
-## Contributing
-
-Contributions to this project are welcome! If you encounter issues or have new feature suggestions, feel free to open a GitHub Issue or submit a Pull Request.
-
----
-
-## License
-
-This project is licensed under the **MIT License**. See the accompanying LICENSE file for more information.
-
